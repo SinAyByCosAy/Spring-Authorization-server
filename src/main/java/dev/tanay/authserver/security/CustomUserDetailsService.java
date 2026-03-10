@@ -1,7 +1,7 @@
 package dev.tanay.authserver.security;
 
+import dev.tanay.authserver.models.User;
 import dev.tanay.authserver.repositories.UserRepository;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -18,6 +18,6 @@ public class CustomUserDetailsService implements UserDetailsService {
         Optional<User> user = userRepository.findUserByEmail(email);
         if(user.isEmpty()) throw new UsernameNotFoundException("User not found");
 
-        return new CustomUserDetails(user);
+        return new CustomUserDetails(user.get());
     }
 }
